@@ -1,10 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\User;
 
-class UserController extends Controller {
+use Illuminate\Http\Request;
 
-    public function getAllUsers() {
+class UserController extends Controller
+{
+    public function helloWorld()
+    {
+        return response()->json("Hello World"); // Return JSON response
     }
 }
