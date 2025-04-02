@@ -27,6 +27,9 @@ class UserController extends Controller
         }
         
         $token = $user -> createToken('auth_token') -> plainTextToken;
-        return response()->json( $request -> password); // Return JSON response
+        return response()->json( [
+            'message' => 'Login successful',
+            'token' => $token
+        ]);
     }
 }
