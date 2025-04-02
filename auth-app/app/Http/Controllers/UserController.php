@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -19,7 +20,13 @@ class UserController extends Controller
         ]);
 
 
+        $user = User::where('username', $request -> username)->first();
 
+        if(!$user || !Hash::check($request -> password, $user -> password)){
+            return response() -> json(['error' => 'Invalid credentials'], 401)
+        }
+        
+        $token = $user -> createToken('auth_token') -> plainTextToken;
         return response()->json( $request -> password); // Return JSON response
     }
 }
