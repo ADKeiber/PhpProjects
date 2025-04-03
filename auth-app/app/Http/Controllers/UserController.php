@@ -23,13 +23,24 @@ class UserController extends Controller
         $user = User::where('username', $request -> username)->first();
 
         if(!$user || !Hash::check($request -> password, $user -> password)){
-            return response() -> json(['error' => 'Invalid credentials'], 401)
+            return response() -> json(['error' => 'Invalid credentials'], 401);
         }
         
         $token = $user -> createToken('auth_token') -> plainTextToken;
         return response()->json( [
             'message' => 'Login successful',
             'token' => $token
+        ]);
+    }
+
+    public function create(Request $request){
+        $request -> validate([
+            'username' => 'required|string',
+            'password'=> 'required|string',
+        ]);
+        User::create([
+            'username' => $request -> username,
+            'password'=> $request -> password
         ]);
     }
 }
