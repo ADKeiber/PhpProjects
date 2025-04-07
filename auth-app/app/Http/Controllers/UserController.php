@@ -20,7 +20,7 @@ class UserController extends Controller
             'password'=> 'required|string',
         ]);
 
-
+        // used to find first one
         $user = User::where('username', $request -> username)->first();
 
         if(!$user || !Hash::check($request -> password, $user -> password)){
