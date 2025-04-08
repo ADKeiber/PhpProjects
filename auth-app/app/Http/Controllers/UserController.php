@@ -22,7 +22,8 @@ class UserController extends Controller
 
         // used to find first one
         $user = User::where('username', $request -> username)->first();
-
+        
+        //makes sure user password is as expected
         if(!$user || !Hash::check($request -> password, $user -> password)){
             return response() -> json(['error' => 'Invalid credentials'], 401);
         }
