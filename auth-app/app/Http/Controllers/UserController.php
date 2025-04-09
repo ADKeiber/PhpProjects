@@ -35,6 +35,7 @@ class UserController extends Controller
         ]);
     }
 
+    //creates a new user
     public function create(Request $request){
         $request -> validate([
             'username' => 'required|string',
