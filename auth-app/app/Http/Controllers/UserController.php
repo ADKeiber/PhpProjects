@@ -37,6 +37,7 @@ class UserController extends Controller
 
     //creates a new user
     public function create(Request $request){
+        //validates certain fields exist
         $request -> validate([
             'username' => 'required|string',
             'password'=> 'required|string|min:6',
